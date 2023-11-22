@@ -91,23 +91,29 @@ module SequenceRecognizer_tb();
     reset = 1;
     X = 0;
     #10 reset = 0;  // Deassert reset after 10 time units
-    #100;          // Continue simulation indefinitely for observation
+    #1000 $finish;  // End simulation after 1000 time units
   end
 
   // Stimulus
-  always #15 X = 1;  // Sequence starts with X = 1
   initial begin
-    // Test scenario to detect 101
-    #20;
-    X = 0; // X = 10
-    #10;
-    X = 1; // X = 101
-    #10;
-    X = 0; // X = 1010
-    #10;
-    X = 1; // X = 10101
-    #10;   // Continue observing
+    // Test scenario
+    #15 X = 1;
+    #10 X = 0;
+    #10 X = 1;
+    #10 X = 0;
+    #10 X = 1;
+    #10 X = 0;
+    #10 X = 1;
+    #10 X = 1;
+    #10 X = 0;
+    #10 X = 1;
+    #10 X = 0;
+    #10 X = 1;
+    #10 X = 1;
+    #10 X = 1; // An extra cycle to observe output stability
+    
   end
 
 endmodule
+
 
